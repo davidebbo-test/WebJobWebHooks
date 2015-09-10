@@ -14,7 +14,11 @@ namespace WebJobWebHooks
         // AzureWebJobsDashboard and AzureWebJobsStorage
         static void Main()
         {
-            var host = new JobHost();
+            var config = new JobHostConfiguration();
+            config.Tracing.ConsoleLevel = System.Diagnostics.TraceLevel.Verbose;
+            var host = new JobHost(config);
+            config.UseWebHooks(host);
+
             // The following code ensures that the WebJob will be running continuously
             host.RunAndBlock();
         }
