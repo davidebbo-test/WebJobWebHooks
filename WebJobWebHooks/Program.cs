@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Azure.WebJobs;
+using Microsoft.Azure.WebJobs.Extensions.WebHooks;
 
 namespace WebJobWebHooks
 {
@@ -17,7 +18,9 @@ namespace WebJobWebHooks
             var config = new JobHostConfiguration();
             config.Tracing.ConsoleLevel = System.Diagnostics.TraceLevel.Verbose;
             var host = new JobHost(config);
-            config.UseWebHooks(host);
+
+            var webHooksConfig = new WebHooksConfiguration();
+            config.UseWebHooks(webHooksConfig);
 
             // The following code ensures that the WebJob will be running continuously
             host.RunAndBlock();
