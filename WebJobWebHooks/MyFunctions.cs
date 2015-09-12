@@ -9,10 +9,16 @@ namespace WebJobWebHooks
 {
     public static class MyFunctions
     {
-        public static void IssueChanged([WebHookTrigger] string body)
+        public static void IssueChanged([WebHookTrigger] Issue issue)
         {
-            Console.WriteLine("IssueChanged");
-            Console.WriteLine(body);
+            Console.WriteLine(issue.ID);
+            Console.WriteLine(issue.Description);
         }
+    }
+
+    public class Issue
+    {
+        public int ID { get; set; }
+        public string Description { get; set; }
     }
 }
