@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Azure.WebJobs;
 using Microsoft.Azure.WebJobs.Extensions.WebHooks;
+using Microsoft.AspNet.WebHooks;
 
 namespace WebJobWebHooks
 {
@@ -20,6 +21,7 @@ namespace WebJobWebHooks
             var host = new JobHost(config);
 
             var webHooksConfig = new WebHooksConfiguration();
+            webHooksConfig.UseReceiver<GitHubWebHookReceiver>();
             config.UseWebHooks(webHooksConfig);
 
             // The following code ensures that the WebJob will be running continuously
